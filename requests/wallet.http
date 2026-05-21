@@ -1,0 +1,32 @@
+### Create wallet
+POST http://localhost:8080/wallets
+Content-Type: application/json
+
+{
+  "ownerName": "Felipe",
+  "initialBalance": 1000
+}
+
+### Get wallet by id
+GET http://localhost:8080/wallets/f8363bdb-b0c0-4d0c-9ebd-4f58612fdfcc
+
+### Create wallet - zero balance
+POST http://localhost:8080/wallets
+Content-Type: application/json
+
+{
+  "owner_id": "fb2a651b-bf82-43c2-adbf-510b0df96014",
+  "initial_balance": 0
+}
+
+### Create wallet - missing owner id (400)
+POST http://localhost:8080/wallets
+Content-Type: application/json
+
+{
+  "owner_id": "",
+  "initial_balance": 500
+}
+
+### Get wallet - not found (404)
+GET http://localhost:8080/wallets/00000000-0000-0000-0000-000000000000
