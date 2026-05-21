@@ -1,6 +1,6 @@
 package com.wallet.demo.modules.wallet.application.usecases;
 
-import com.wallet.demo.modules.wallet.domain.Wallet;
+import com.wallet.demo.modules.wallet.application.WalletViewDto;
 import com.wallet.demo.modules.wallet.domain.OwnerId;
 import com.wallet.demo.modules.wallet.domain.interfaces.WalletRepository;
 import com.wallet.demo.modules.wallet.domain.services.WalletDomainService;
@@ -20,8 +20,7 @@ public class CreateWalletUseCase {
     this.walletRepository = walletRepository;
   }
 
-  public Wallet execute(OwnerId ownerId, BigInteger initialBalance) {
-    Wallet wallet = walletDomainService.createWallet(ownerId, initialBalance);
-    return walletRepository.save(wallet);
+  public WalletViewDto execute(OwnerId ownerId, BigInteger initialBalance) {
+    return new WalletViewDto(walletRepository.save(walletDomainService.createWallet(ownerId, initialBalance)));
   }
 }

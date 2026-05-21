@@ -1,7 +1,7 @@
 package com.wallet.demo.modules.wallet.application.usecases;
 
+import com.wallet.demo.modules.wallet.application.WalletViewDto;
 import com.wallet.demo.modules.wallet.domain.exceptions.WalletNotFoundException;
-import com.wallet.demo.modules.wallet.domain.Wallet;
 import com.wallet.demo.modules.wallet.domain.WalletId;
 import com.wallet.demo.modules.wallet.domain.interfaces.WalletRepository;
 
@@ -16,8 +16,8 @@ public class GetWalletUseCase {
     this.walletRepository = walletRepository;
   }
 
-  public Wallet execute(WalletId walletId) {
-    return walletRepository.findById(walletId)
-        .orElseThrow(() -> new WalletNotFoundException(walletId.toString()));
+  public WalletViewDto execute(WalletId walletId) {
+    return new WalletViewDto(walletRepository.findById(walletId)
+        .orElseThrow(() -> new WalletNotFoundException(walletId.toString())));
   }
 }
