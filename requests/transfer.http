@@ -1,0 +1,45 @@
+### Create transfer
+POST http://localhost:8080/transfers
+Content-Type: application/json
+
+{
+  "source_wallet_id": "6565ad7c-33fe-4b62-8c71-40a660297f4a",
+  "destination_wallet_id": "81386dfa-f2ce-41ca-bf57-7f2cdacb5d9a",
+  "amount": 500,
+  "currency": "BRL"
+}
+
+### Get transfer by id
+GET http://localhost:8080/transfers/{{transfer_id}}
+
+### Create transfer - wallet not found (404)
+POST http://localhost:8080/transfers
+Content-Type: application/json
+
+{
+  "source_wallet_id": "00000000-0000-0000-0000-000000000000",
+  "destination_wallet_id": "00000000-0000-0000-0000-000000000000",
+  "amount": 100,
+  "currency": "BRL"
+}
+
+### Create transfer - insufficient balance (400)
+POST http://localhost:8080/transfers
+Content-Type: application/json
+
+{
+  "source_wallet_id": "{{source_wallet_id}}",
+  "destination_wallet_id": "{{destination_wallet_id}}",
+  "amount": 999999,
+  "currency": "BRL"
+}
+
+### Create transfer - missing fields (400)
+POST http://localhost:8080/transfers
+Content-Type: application/json
+
+{
+  "source_wallet_id": "",
+  "destination_wallet_id": "",
+  "amount": 100
+}

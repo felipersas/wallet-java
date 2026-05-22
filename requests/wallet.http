@@ -8,15 +8,15 @@ Content-Type: application/json
 }
 
 ### Get wallet by id
-GET http://localhost:8080/wallets/f8363bdb-b0c0-4d0c-9ebd-4f58612fdfcc
+GET http://localhost:8080/wallets/81386dfa-f2ce-41ca-bf57-7f2cdacb5d9a
 
 ### Create wallet - zero balance
 POST http://localhost:8080/wallets
 Content-Type: application/json
 
 {
-  "owner_id": "fb2a651b-bf82-43c2-adbf-510b0df96014",
-  "initial_balance": 0
+  "owner_id": "fb2a651b-cf82-43c2-adbf-510b0df96014",
+  "initial_balance": 1000
 }
 
 ### Create wallet - missing owner id (400)
