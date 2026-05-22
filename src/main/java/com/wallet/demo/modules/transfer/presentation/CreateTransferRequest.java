@@ -14,7 +14,7 @@ public record CreateTransferRequest(
 
     @JsonProperty("destination_wallet_id") @NotBlank(message = "Destination wallet ID is required") String destinationWalletId,
 
-    @JsonProperty("amount") @NotBlank(message = "Amount is required") BigInteger amount,
+    @JsonProperty("amount") @NotNull(message = "Amount is required") BigInteger amount,
 
     @JsonProperty("currency") @NotNull(message = "Currency is required") MoneyCurrency currency) {
 }

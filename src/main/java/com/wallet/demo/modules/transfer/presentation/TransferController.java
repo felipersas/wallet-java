@@ -3,6 +3,7 @@ package com.wallet.demo.modules.transfer.presentation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +25,7 @@ public class TransferController {
   }
 
   @PostMapping
-  public void createTransfer(@RequestBody CreateTransferRequest request) {
+  public void createTransfer(@Valid @RequestBody CreateTransferRequest request) {
     createTransferUseCase.execute(WalletId.from(request.sourceWalletId()),
         WalletId.from(request.destinationWalletId()),
         request.amount(), request.currency());
