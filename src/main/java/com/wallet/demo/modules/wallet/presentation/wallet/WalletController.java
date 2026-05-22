@@ -16,7 +16,7 @@ import jakarta.validation.Valid;
 import com.wallet.demo.modules.wallet.application.usecases.CreateWalletUseCase;
 import com.wallet.demo.modules.wallet.application.usecases.GetWalletUseCase;
 import com.wallet.demo.modules.wallet.domain.OwnerId;
-import com.wallet.demo.modules.wallet.domain.WalletId;
+import com.wallet.demo.shared.domain.WalletId;
 
 @RestController
 @RequestMapping("/wallets")

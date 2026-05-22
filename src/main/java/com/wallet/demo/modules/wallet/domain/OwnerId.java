@@ -1,6 +1,7 @@
 package com.wallet.demo.modules.wallet.domain;
 
 import java.util.UUID;
+import com.wallet.demo.shared.domain.BaseId;
 
 public class OwnerId extends BaseId {
 

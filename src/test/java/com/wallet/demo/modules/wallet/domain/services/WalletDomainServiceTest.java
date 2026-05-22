@@ -62,7 +62,7 @@ class WalletDomainServiceTest {
     void shouldRejectDuplicateOwner() {
       OwnerId ownerId = OwnerId.newId();
       Wallet existing = Wallet.open(
-          com.wallet.demo.modules.wallet.domain.WalletId.newId(),
+          com.wallet.demo.shared.domain.WalletId.newId(),
           ownerId, BigInteger.ZERO);
       when(walletRepository.findByOwnerId(ownerId)).thenReturn(Optional.of(existing));
 

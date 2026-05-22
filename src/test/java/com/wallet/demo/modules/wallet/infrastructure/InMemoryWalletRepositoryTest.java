@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import com.wallet.demo.modules.wallet.domain.OwnerId;
 import com.wallet.demo.modules.wallet.domain.Wallet;
-import com.wallet.demo.modules.wallet.domain.WalletId;
+import com.wallet.demo.shared.domain.WalletId;
 
 class InMemoryWalletRepositoryTest {
 

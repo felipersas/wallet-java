@@ -19,9 +19,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.wallet.demo.modules.wallet.application.WalletViewDto;
 import com.wallet.demo.modules.wallet.application.usecases.CreateWalletUseCase;
 import com.wallet.demo.modules.wallet.application.usecases.GetWalletUseCase;
-import com.wallet.demo.modules.wallet.domain.WalletId;
 import com.wallet.demo.modules.wallet.domain.exceptions.DuplicateOwnerWalletException;
 import com.wallet.demo.modules.wallet.domain.exceptions.WalletNotFoundException;
+import com.wallet.demo.shared.domain.WalletId;
 
 @WebMvcTest(WalletController.class)
 class WalletControllerTest {
@@ -46,10 +46,10 @@ class WalletControllerTest {
           .thenReturn(new WalletViewDto(walletId.toString(), ownerUuid.toString(), BigInteger.valueOf(500)));
 
       mockMvc.perform(post("/wallets")
-              .contentType(MediaType.APPLICATION_JSON)
-              .content("""
-                  {"owner_id": "%s", "initial_balance": 500}
-                  """.formatted(ownerUuid)))
+          .contentType(MediaType.APPLICATION_JSON)
+          .content("""
+              {"owner_id": "%s", "initial_balance": 500}
+              """.formatted(ownerUuid)))
           .andExpect(status().isCreated())
           .andExpect(header().string("Location", "/wallets/" + walletId))
           .andExpect(jsonPath("$.id").value(walletId.toString()))
@@ -60,10 +60,10 @@ class WalletControllerTest {
     @Test
     void shouldReturn400WhenOwnerIdIsBlank() throws Exception {
       mockMvc.perform(post("/wallets")
-              .contentType(MediaType.APPLICATION_JSON)
-              .content("""
-                  {"owner_id": "", "initial_balance": 500}
-                  """))
+          .contentType(MediaType.APPLICATION_JSON)
+          .content("""
+              {"owner_id": "", "initial_balance": 500}
+              """))
           .andExpect(status().isBadRequest())
           .andExpect(jsonPath("$.message").value("Validation failed"))
           .andExpect(jsonPath("$.errors[?(@.field == 'ownerId')]").exists());
@@ -72,10 +72,10 @@ class WalletControllerTest {
     @Test
     void shouldReturn400WhenOwnerIdIsMissing() throws Exception {
       mockMvc.perform(post("/wallets")
-              .contentType(MediaType.APPLICATION_JSON)
-              .content("""
-                  {"initial_balance": 500}
-                  """))
+          .contentType(MediaType.APPLICATION_JSON)
+          .content("""
+              {"initial_balance": 500}
+              """))
           .andExpect(status().isBadRequest())
           .andExpect(jsonPath("$.message").value("Validation failed"));
     }
@@ -84,10 +84,10 @@ class WalletControllerTest {
     void shouldReturn400WhenBalanceIsNegative() throws Exception {
       UUID ownerUuid = UUID.randomUUID();
       mockMvc.perform(post("/wallets")
-              .contentType(MediaType.APPLICATION_JSON)
-              .content("""
-                  {"owner_id": "%s", "initial_balance": -100}
-                  """.formatted(ownerUuid)))
+          .contentType(MediaType.APPLICATION_JSON)
+          .content("""
+              {"owner_id": "%s", "initial_balance": -100}
+              """.formatted(ownerUuid)))
           .andExpect(status().isBadRequest())
           .andExpect(jsonPath("$.message").value("Validation failed"));
     }
@@ -96,10 +96,10 @@ class WalletControllerTest {
     void shouldReturn400WhenBalanceIsNull() throws Exception {
       UUID ownerUuid = UUID.randomUUID();
       mockMvc.perform(post("/wallets")
-              .contentType(MediaType.APPLICATION_JSON)
-              .content("""
-                  {"owner_id": "%s"}
-                  """.formatted(ownerUuid)))
+          .contentType(MediaType.APPLICATION_JSON)
+          .content("""
+              {"owner_id": "%s"}
+              """.formatted(ownerUuid)))
           .andExpect(status().isBadRequest())
           .andExpect(jsonPath("$.message").value("Validation failed"));
     }
@@ -111,10 +111,10 @@ class WalletControllerTest {
           .thenThrow(new DuplicateOwnerWalletException(ownerUuid.toString()));
 
       mockMvc.perform(post("/wallets")
-              .contentType(MediaType.APPLICATION_JSON)
-              .content("""
-                  {"owner_id": "%s", "initial_balance": 0}
-                  """.formatted(ownerUuid)))
+          .contentType(MediaType.APPLICATION_JSON)
+          .content("""
+              {"owner_id": "%s", "initial_balance": 0}
+              """.formatted(ownerUuid)))
           .andExpect(status().isConflict())
           .andExpect(jsonPath("$.message").value("Wallet already exists for owner: " + ownerUuid));
     }

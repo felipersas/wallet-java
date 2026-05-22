@@ -7,6 +7,8 @@ import java.util.UUID;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import com.wallet.demo.shared.domain.WalletId;
+
 class BaseIdTest {
 
   @Nested

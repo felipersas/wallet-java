@@ -4,9 +4,9 @@ import java.math.BigInteger;
 
 import com.wallet.demo.modules.wallet.domain.OwnerId;
 import com.wallet.demo.modules.wallet.domain.Wallet;
-import com.wallet.demo.modules.wallet.domain.WalletId;
 import com.wallet.demo.modules.wallet.domain.exceptions.DuplicateOwnerWalletException;
 import com.wallet.demo.modules.wallet.domain.interfaces.WalletRepository;
+import com.wallet.demo.shared.domain.WalletId;
 
 import org.springframework.stereotype.Service;
 

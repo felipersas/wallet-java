@@ -15,10 +15,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.wallet.demo.modules.wallet.application.WalletViewDto;
 import com.wallet.demo.modules.wallet.domain.OwnerId;
 import com.wallet.demo.modules.wallet.domain.Wallet;
-import com.wallet.demo.modules.wallet.domain.WalletId;
 import com.wallet.demo.modules.wallet.domain.exceptions.DuplicateOwnerWalletException;
 import com.wallet.demo.modules.wallet.domain.interfaces.WalletRepository;
 import com.wallet.demo.modules.wallet.domain.services.WalletDomainService;
+import com.wallet.demo.shared.domain.WalletId;
 
 @ExtendWith(MockitoExtension.class)
 class CreateWalletUseCaseTest {

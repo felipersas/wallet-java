@@ -1,7 +1,8 @@
 package com.wallet.demo.modules.wallet.domain;
 
 import java.math.BigInteger;
-import java.util.Objects;
+
+import com.wallet.demo.shared.domain.WalletId;
 
 public final class Wallet {
   private final WalletId id;

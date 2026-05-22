@@ -2,6 +2,8 @@ package com.wallet.demo.modules.wallet.domain;
 
 import org.junit.jupiter.api.Test;
 
+import com.wallet.demo.shared.domain.WalletId;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigInteger;

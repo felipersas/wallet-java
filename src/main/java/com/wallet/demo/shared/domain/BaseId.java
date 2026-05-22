@@ -1,4 +1,4 @@
-package com.wallet.demo.modules.wallet.domain;
+package com.wallet.demo.shared.domain;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -29,8 +29,10 @@ public abstract class BaseId {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
     BaseId that = (BaseId) o;
     return value.equals(that.value);
   }

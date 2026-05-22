@@ -1,4 +1,4 @@
-package com.wallet.demo.modules.wallet.domain;
+package com.wallet.demo.shared.domain;
 
 import java.util.UUID;
 

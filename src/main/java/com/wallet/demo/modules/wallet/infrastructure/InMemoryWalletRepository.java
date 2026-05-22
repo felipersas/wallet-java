@@ -7,8 +7,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.stereotype.Repository;
 
 import com.wallet.demo.modules.wallet.domain.Wallet;
-import com.wallet.demo.modules.wallet.domain.WalletId;
 import com.wallet.demo.modules.wallet.domain.interfaces.WalletRepository;
+import com.wallet.demo.shared.domain.WalletId;
 import com.wallet.demo.modules.wallet.domain.OwnerId;
 
 @Repository
