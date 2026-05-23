@@ -1,5 +1,6 @@
 package com.wallet.demo.modules.transfer.infrastructure;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ import com.wallet.demo.modules.transfer.domain.TransferId;
 import com.wallet.demo.modules.transfer.domain.interfaces.TransferRepository;
 
 @Repository
+@Profile({"default", "test"})
 public class InMemoryTransferRepository implements TransferRepository {
   private final Map<TransferId, Transfer> storage = new HashMap<>();
 

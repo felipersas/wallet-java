@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import com.wallet.demo.modules.wallet.domain.Wallet;
@@ -12,6 +13,7 @@ import com.wallet.demo.shared.domain.WalletId;
 import com.wallet.demo.modules.wallet.domain.OwnerId;
 
 @Repository
+@Profile({"default", "test"})
 public class InMemoryWalletRepository implements WalletRepository {
   private final Map<WalletId, Wallet> storage = new ConcurrentHashMap<>();
 
