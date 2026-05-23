@@ -4,9 +4,23 @@ import java.math.BigInteger;
 
 import com.wallet.demo.shared.domain.enums.MoneyCurrency;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
+@Embeddable
 public class Money {
+  @Column(name = "amount", nullable = false)
   private final BigInteger amount;
+
+  @Enumerated(EnumType.STRING)
+  @Column(name = "currency", nullable = false, length = 3)
   private MoneyCurrency currency = MoneyCurrency.BRL;
+
+  protected Money() {
+    this.amount = null;
+  }
 
   public Money(BigInteger amount, MoneyCurrency currency) {
     if (amount == null || amount.compareTo(BigInteger.ZERO) < 0) {
