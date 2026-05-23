@@ -40,9 +40,11 @@ class TransferControllerTest {
   class CreateTransfer {
 
     @Test
-    void shouldReturn200WhenTransferCreated() throws Exception {
+    void shouldReturn202WhenTransferCreated() throws Exception {
       String sourceId = WalletId.newId().toString();
       String destinationId = WalletId.newId().toString();
+      TransferId transferId = TransferId.newId();
+      when(createTransferUseCase.execute(any(), any(), any(), any())).thenReturn(transferId);
 
       mockMvc.perform(post("/transfers")
           .contentType(MediaType.APPLICATION_JSON)
@@ -54,7 +56,12 @@ class TransferControllerTest {
                 "currency": "BRL"
               }
               """.formatted(sourceId, destinationId)))
-          .andExpect(status().isOk());
+          .andExpect(status().isAccepted())
+          .andExpect(header().string("Location", "/transfers/" + transferId))
+          .andExpect(jsonPath("$.id").value(transferId.toString()))
+          .andExpect(jsonPath("$.status").value("PENDING"))
+          .andExpect(jsonPath("$.amount").value(500))
+          .andExpect(jsonPath("$.currency").value("BRL"));
     }
 
     @Test
@@ -126,7 +133,7 @@ class TransferControllerTest {
       String destinationId = WalletId.newId().toString();
       Money money = Money.create(BigInteger.valueOf(500), MoneyCurrency.BRL);
       TransferViewDto dto = new TransferViewDto(transferId.toString(), sourceId, destinationId,
-          money, MoneyCurrency.BRL, TransferStatus.PENDING, null);
+          money.getAmount(), MoneyCurrency.BRL, TransferStatus.PENDING, null);
       when(getTransferUseCase.execute(any())).thenReturn(dto);
 
       mockMvc.perform(get("/transfers/{id}", transferId))

@@ -29,7 +29,7 @@ class TransferTest {
       assertEquals(sourceWalletId, transfer.getSourceWalletId());
       assertEquals(destinationWalletId, transfer.getDestinationWalletId());
       assertEquals(amount, transfer.getAmount());
-      assertEquals(MoneyCurrency.BRL, transfer.getCurrency());
+      assertEquals(MoneyCurrency.BRL, transfer.getAmount().getCurrency());
       assertEquals(TransferStatus.PENDING, transfer.getStatus());
       assertNotNull(transfer.getCreatedAt());
     }

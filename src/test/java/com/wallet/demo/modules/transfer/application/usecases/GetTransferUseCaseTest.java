@@ -52,7 +52,7 @@ class GetTransferUseCaseTest {
       assertEquals(transfer.getId().toString(), dto.id());
       assertEquals(source.toString(), dto.fromWalletId());
       assertEquals(destination.toString(), dto.toWalletId());
-      assertEquals(money, dto.amount());
+      assertEquals(money.getAmount(), dto.amount());
       assertEquals(MoneyCurrency.BRL, dto.currency());
     }
 
