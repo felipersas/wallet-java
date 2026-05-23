@@ -15,7 +15,7 @@ POST http://localhost:8080/wallets
 Content-Type: application/json
 
 {
-  "owner_id": "fb2a651b-cf82-43c2-adbf-510b0df96014",
+  "owner_id": "2b2a651b-cf82-43c2-adbf-510b0df96014",
   "initial_balance": 1000
 }
 
