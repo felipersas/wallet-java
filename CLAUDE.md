@@ -15,7 +15,11 @@ HTTP test requests are in `requests/` (wallet.http, transfer.http) for use with 
 
 ## Architecture
 
-Spring Boot 4.0.6 / Java 17 / Maven. H2 in-memory database.
+Spring Boot 4.0.6 / Java 17 / Maven. Dual database: H2 (default/test), PostgreSQL (postgres profile).
+
+### Architectural Decisions
+
+- **JPA annotations on domain entities** — for simplicity, `@Entity`, `@Table`, `@Column`, `@Embeddable` annotations are placed directly on domain entities and value objects rather than maintaining separate infrastructure JPA classes. This couples domain to persistence but eliminates mapping boilerplate in a small project.
 
 ### Modular DDD Structure
 
