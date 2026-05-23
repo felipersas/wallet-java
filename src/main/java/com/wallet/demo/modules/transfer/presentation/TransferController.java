@@ -1,5 +1,8 @@
 package com.wallet.demo.modules.transfer.presentation;
 
+import java.net.URI;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,10 +28,16 @@ public class TransferController {
   }
 
   @PostMapping
-  public void createTransfer(@Valid @RequestBody CreateTransferRequest request) {
-    createTransferUseCase.execute(WalletId.from(request.sourceWalletId()),
+  public ResponseEntity<TransferResponse> createTransfer(@Valid @RequestBody CreateTransferRequest request) {
+    TransferId transferId = createTransferUseCase.execute(WalletId.from(request.sourceWalletId()),
         WalletId.from(request.destinationWalletId()),
         request.amount(), request.currency());
+    TransferResponse response = new TransferResponse(transferId.toString(),
+        request.sourceWalletId(), request.destinationWalletId(),
+        request.amount(), request.currency().name(), "PENDING", null);
+    return ResponseEntity.accepted()
+        .location(URI.create("/transfers/" + transferId))
+        .body(response);
   }
 
   @GetMapping("/{id}")

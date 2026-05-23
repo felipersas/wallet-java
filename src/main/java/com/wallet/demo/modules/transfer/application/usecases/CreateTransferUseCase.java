@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import com.wallet.demo.modules.transfer.domain.Transfer;
+import com.wallet.demo.modules.transfer.domain.TransferId;
 import com.wallet.demo.modules.transfer.domain.interfaces.TransferRepository;
 import com.wallet.demo.modules.transfer.domain.interfaces.WalletCreditor;
 import com.wallet.demo.modules.transfer.domain.interfaces.WalletDebtor;
@@ -33,17 +34,24 @@ public class CreateTransferUseCase {
     this.txTemplate = txTemplate;
   }
 
-  @Async
-  public void execute(WalletId sourceWalletId, WalletId destinationWalletId, BigInteger amount,
+  public TransferId execute(WalletId sourceWalletId, WalletId destinationWalletId, BigInteger amount,
       MoneyCurrency currency) {
     walletExistenceChecker.ensureExists(sourceWalletId);
     walletExistenceChecker.ensureExists(destinationWalletId);
 
     Money money = Money.create(amount, currency);
+    TransferId transferId = TransferId.newId();
+    processAsync(transferId, sourceWalletId, destinationWalletId, money);
+    return transferId;
+  }
+
+  @Async
+  public void processAsync(TransferId transferId, WalletId sourceWalletId, WalletId destinationWalletId,
+      Money money) {
     txTemplate.executeWithoutResult(status -> {
       walletDebtor.debit(sourceWalletId, money);
       walletCreditor.credit(destinationWalletId, money);
-      transferRepository.save(Transfer.create(sourceWalletId, destinationWalletId, money));
+      transferRepository.save(Transfer.create(transferId, sourceWalletId, destinationWalletId, money));
     });
   }
 }
