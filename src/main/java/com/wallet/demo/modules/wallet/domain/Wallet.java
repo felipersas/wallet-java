@@ -4,10 +4,29 @@ import java.math.BigInteger;
 
 import com.wallet.demo.shared.domain.WalletId;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "wallets")
 public final class Wallet {
+  @Id
+  @Column(name = "id", nullable = false)
   private final WalletId id;
+
+  @Column(name = "owner_id", nullable = false, unique = true)
   private final OwnerId ownerId;
+
+  @Column(name = "balance", nullable = false)
   private BigInteger balance;
+
+  protected Wallet() {
+    this.id = null;
+    this.ownerId = null;
+    this.balance = null;
+  }
 
   private Wallet(WalletId id, OwnerId ownerId, BigInteger balance) {
     this.id = id;

@@ -3,8 +3,8 @@ POST http://localhost:8080/transfers
 Content-Type: application/json
 
 {
-  "source_wallet_id": "6565ad7c-33fe-4b62-8c71-40a660297f4a",
-  "destination_wallet_id": "81386dfa-f2ce-41ca-bf57-7f2cdacb5d9a",
+  "source_wallet_id": "6a123a2d-57cb-42a4-8c4c-0947eccf28f0",
+  "destination_wallet_id": "467656ed-bd83-44d1-aff5-1db653135b1f",
   "amount": 500,
   "currency": "BRL"
 }

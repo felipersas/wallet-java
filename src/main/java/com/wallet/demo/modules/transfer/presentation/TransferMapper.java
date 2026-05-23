@@ -11,7 +11,7 @@ public class TransferMapper {
         transfer.id().toString(),
         transfer.fromWalletId().toString(),
         transfer.toWalletId().toString(),
-        transfer.amount().getAmount(),
+        transfer.amount(),
         transfer.currency().toString(),
         transfer.status().name(),
         transfer.createdAt());
